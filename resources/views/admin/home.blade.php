@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.admin')
 @section('content')
  
 <section class="content-header">
@@ -7,7 +7,7 @@
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ url('admin/home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
       </ol>
     </section>
 
@@ -31,7 +31,7 @@
                         </div>
                     @endif
 
-                    You are logged in as a User!
+                    You are logged in as a Admin!
         </div>
       </div>
 

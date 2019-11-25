@@ -111,7 +111,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('user.logout') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
                 </div>
@@ -148,13 +148,11 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
-        <li><a href=""><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li><a href="{{ route('home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="divider"></li>
-        <li><a href=""><i class="fa fa-file-text"></i> <span>Staff</span></a></li>
+        <li><a href="{{ route('performances.index')}}"><i class="fa fa-fw fa-font"></i> <span>Performance</span></a></li>
         <li class="divider"></li>
-        <li><a href=""><i class="fa fa-fw fa-font"></i> <span>Performance</span></a></li>
-        <li class="divider"></li>
-        <li><a href=""><i class="fa fa-newspaper-o"></i> <span>Notifications</span></a></li>
+        <li><a href="{{ route('notifications.index')}}"><i class="fa fa-newspaper-o"></i> <span>Notifications</span></a></li>
         <li class="divider"></li>
         <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
       </ul>

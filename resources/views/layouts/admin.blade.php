@@ -111,7 +111,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
                 </div>
@@ -148,13 +148,13 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
-        <li><a href=""><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li><a href="{{ route('admin')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="divider"></li>
-        <li><a href=""><i class="fa fa-file-text"></i> <span>Staff</span></a></li>
+        <li><a href="{{ route('staff.index')}}"><i class="fa fa-file-text"></i> <span>Staff</span></a></li>
         <li class="divider"></li>
-        <li><a href=""><i class="fa fa-fw fa-font"></i> <span>Performance</span></a></li>
+        <li><a href="{{ route('performance.index')}}"><i class="fa fa-fw fa-font"></i> <span>Performance</span></a></li>
         <li class="divider"></li>
-        <li><a href=""><i class="fa fa-newspaper-o"></i> <span>Notifications</span></a></li>
+        <li><a href="{{ route('notification.index')}}"><i class="fa fa-newspaper-o"></i> <span>Notifications</span></a></li>
         <li class="divider"></li>
         <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
       </ul>
@@ -253,6 +253,16 @@
 <!-- fullCalendar -->
 <script src="{{ asset('bower_components/moment/moment.js')}}"></script>
 		<script src="{{ asset('bower_components/fullcalendar/dist/fullcalendar.min.js')}}"></script>
+    <script src="{{ asset('bower_components/ckeditor/ckeditor.js')}}"></script>
+		<script>
+		$(function () {
+			// Replace the <textarea id="editor1"> with a CKEditor
+			// instance, using default configuration.
+			CKEDITOR.replace('editor1')
+			//bootstrap WYSIHTML5 - text editor
+			$('.textarea').wysihtml5()
+		})
+		</script>
 		<script>
 			$(function () {
 
