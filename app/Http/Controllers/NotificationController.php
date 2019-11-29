@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Notification;
 class NotificationController extends Controller
 {
     public function __construct()
@@ -17,7 +17,8 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return view('notifications.index');
+        $notifications = Notification::all()->where('id', Auth::user()->id);
+        return view('notifications.index', comapct('notifications'));
     }
 
     /**
