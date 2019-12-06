@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Performance;
+use Auth;
 class PerformanceController extends Controller
 {
     public function __construct()   
@@ -17,7 +18,7 @@ class PerformanceController extends Controller
      */
     public function index()
     {
-        $perfomance = Performance::all()->where('id', Auth::user()->id);
+        $perfomance = Performance::all()->where('staff_id', Auth::user()->id);
         return view('performances.index', compact('performance'));
     }
 

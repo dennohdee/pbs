@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -26,6 +26,8 @@ Route::prefix('admin')->group(function() {
     Route::resource('staff','AdminStaffController');
     Route::resource('performance','AdminPerformanceController');
     Route::resource('notification','AdminNotificationController');
+    Route::resource('categories','AdminCats');
+    Route::resource('departments','AdminDepts');
 
 });
 

@@ -80,7 +80,7 @@
       </div>
  
   
-      <div class="modal fade" id="modal-default">
+      <div class="modal fade" id="modal-defaultf1">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -103,14 +103,17 @@
             </div>
             <div class="col-md-6">
             <strong>Points</strong>
-                <input type="number" name="idNo1" value="{{ old('idNo1') }}" class="form-control" placeholder="Points.">
+                <input type="number" name="points" value="{{ old('points') }}" class="form-control" placeholder="Points.(+/-)">
             </div>
             </div>
             <div class="pad form-group">
-            <strong>Remarks </strong>
-    
-				<textarea name="message" id="editor1" class="form-control" required></textarea>
-					
+            <strong>Category </strong>
+            <select name="category_id" class="form-control select2" style="width: 100%;" style="border-radius:0px;">
+                  <option selected="selected" value="">-Select Category-</option> 
+                 
+                           <option value=""> </option>    
+                             
+             </select>					
             </div>
             
             <div class="pull-left">

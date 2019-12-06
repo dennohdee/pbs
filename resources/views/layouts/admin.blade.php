@@ -150,6 +150,10 @@
         <li class="header">MENU</li>
         <li><a href="{{ route('admin')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="divider"></li>
+        <li><a href="{{ route('departments.index')}}"><i class="fa fa-cubes"></i> <span>Departments</span></a></li>
+        <li class="divider"></li>
+        <li><a href="{{ route('categories.index')}}"><i class="fa fa-object-group"></i> <span>Categories</span></a></li>
+        <li class="divider"></li>
         <li><a href="{{ route('staff.index')}}"><i class="fa fa-file-text"></i> <span>Staff</span></a></li>
         <li class="divider"></li>
         <li><a href="{{ route('performance.index')}}"><i class="fa fa-fw fa-font"></i> <span>Performance</span></a></li>

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('otherNames');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('deptId');
+            $table->integer('deptId')->nullable()->references('id')->on('departments')->onUpdate('CASCADE')->onDelete('RESTRICT');
             $table->string('position');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

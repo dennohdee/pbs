@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Notification;
-use Auth;
-class NotificationController extends Controller
+use App\Department;
+class AdminDepts extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
     /**
      * Display a listing of the resource.
@@ -18,8 +17,9 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::all()->where('staff_id', Auth::user()->id);
-        return view('notifications.index', compact('notifications'));
+        //
+        $depts = Department::all();
+        return view('admin.departments.index', compact('depts'))->with('i');
     }
 
     /**

@@ -3,12 +3,12 @@
  
 <section class="content-header">
       <h1>
-        Notifications
+        Categories
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('admin/home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('notification.index')}}"><i class="fa fa-fw fa-font"></i> Notification</a></li>
+        <li><a href="{{ route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('categories.index')}}"><i class="fa fa-object-group"></i> Categories</a></li>
       </ol>
     </section>
 
@@ -18,7 +18,7 @@
       <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title"></h3>
-            <button class="btn btn-primary pull-left" data-toggle="modal" data-target="#modal-default">Add Notification</button>
+            <button class="btn btn-primary pull-left" data-toggle="modal" data-target="#modal-default">Add Category</button>
           <div class="box-tools">
           
             <button type="button" class="btn btn-box-tool pull-right" data-widget="collapse" data-toggle="tooltip"
@@ -34,42 +34,34 @@
                 <thead>
                 <tr>
                  <th>S/No.</th>
-                 <th>Staff No.</th>
-                 <th>Sur Name</th>
-                 <th>Other Name</th>
-                 <th>Department</th>
-                 <th>Notification.</th>
+                 <th>Name</th>
+                 <th>Description</th>
                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                
+                @foreach($cats as $cat)
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                 <td>{{ ++$i }}</td>
+                 <td>{!! $cat->name !!}</td>
+                 <td>{!! $cat->description !!}</td>
                  <td>
                  <form action="" method="post">
                     <a class="btn btn-sm btn-success" href="">View</a>
                     <a class="btn btn-sm btn-warning" href="">Edit</a>
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete staff?')" type="submit">Delete</button>
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete Category?')" type="submit">Delete</button>
                     </form>
                  </td>
                 </tr>
+                @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
-                 <th>S/No.</th>
-                 <th>Staff No.</th>
-                 <th>Sur Name</th>
-                 <th>Other Name</th>
-                 <th>Department</th>
-                 <th>Notification.</th>
+                <th>S/No.</th>
+                 <th>Name</th>
+                 <th>Description</th>
                  <th>Actions</th>
                 </tr>
                 </tfoot>
@@ -86,33 +78,21 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add Notification</h4>
+                <h4 class="modal-title">Add Category</h4>
               </div>
               <div class="modal-body">
-                <form action="{{ route('notification.create')}}" method="post">
+                <form action="{{ route('categories.store')}}" method="post">
                 @csrf
-        <div class="row">
-        <div class="col-md-6 form-group">
-            <strong>Staff</strong>
-            <select name="department" class="form-control select2" style="width: 100%;" style="border-radius:0px;">
-                  <option selected="selected" value="">-Select Staff-</option> 
-                 
-                           <option value=""> </option>    
-                             
-             </select>
-            </div>
-            <div class="col-md-6">
-            <strong>Subject</strong>
-                <input type="text" name="subject" value="{{ old('subject') }}" class="form-control" placeholder="Subject">
-            </div>
-            </div>
-            <div class="pad form-group">
-            <strong>Message </strong>
-    
-				<textarea name="message" id="editor1" class="form-control" required></textarea>
-					
-            </div>
+        <div class="form-group">
             
+            <strong>Category Name </strong>
+                <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Category Name">
+            
+            <strong>Description</strong>
+            <textarea id="editor1" name="description" class="form-control" style="width: 100%;" style="border-radius:0px;">
+                  </textarea>
+            
+            </div>
             <div class="pull-left">
             <p>&nbsp; </p>
                 <a class="btn btn-sm btn-danger" data-dismiss="modal">Close</a>
