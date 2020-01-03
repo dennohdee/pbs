@@ -27,41 +27,40 @@
         </div>
         <div class="box-body">
         <!--tbl -->
-      
+      <h3>Totals Points:  <i>@foreach($performances as $perfomance) {{ $perfomance->points }} @endforeach</i></h3>
         <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                  <th>S/No.</th>
-                 <th>Staff No.</th>
-                 <th>Sur Name</th>
-                 <th>Other Name</th>
-                 <th>Department</th>
                  <th>Performances.</th>
+                 <th>Category</th>
+                 <th>Description</th>
+                 <th>Done By</th>
                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                
+                @foreach($traces as $trace)
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                 <td>{{ ++$i }}</td>
+                 <td>{{ $trace->points }}</td>
+                 <td>{{ $trace->category->name }}</td>
+                 <td>{{ $trace->description }}</td>
+                 <td>{{ $trace->admin->name }}</td>
+                 <td>{{ $trace->points }}</td>
                  <td>
                     <a class="btn btn-sm btn-success" href="">View</a>
                  </td>
                 </tr>
+                @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
                  <th>S/No.</th>
-                 <th>Staff No.</th>
-                 <th>Sur Name</th>
-                 <th>Other Name</th>
-                 <th>Department</th>
                  <th>Performances.</th>
+                 <th>Category</th>
+                 <th>Description</th>
+                 <th>Done By</th>
                  <th>Actions</th>
                 </tr>
                 </tfoot>

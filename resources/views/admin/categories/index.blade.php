@@ -27,7 +27,24 @@
           </div>
         </div>
         <div class="box-body">
-        
+        @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <p>{{$message}}</p>
+                </div>
+              @endif
+        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                           <strong>Error! </strong>There were some errors with inputs. 
+                         <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul> 
+                    </div>
+                    
+                @endif
          <!--tbl -->
       
          <table id="example1" class="table table-bordered table-striped">
@@ -46,15 +63,61 @@
                  <td>{!! $cat->name !!}</td>
                  <td>{!! $cat->description !!}</td>
                  <td>
-                 <form action="" method="post">
-                    <a class="btn btn-sm btn-success" href="">View</a>
-                    <a class="btn btn-sm btn-warning" href="">Edit</a>
+                 <form action="{{ route('categories.destroy', $cat->id)}}" method="post">
+              
+                    <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-default-{{ $cat->id }}"><i class="fa fa-edit">Edit</i></a>
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete Category?')" type="submit">Delete</button>
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete Category?')" type="submit"><i class="fa fa-trash">Delete</i></button>
                     </form>
                  </td>
                 </tr>
+                <!--edit modal-->
+                <div class="modal fade" id="modal-default-{{ $cat->id }}">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Category</h4>
+              </div>
+              <div class="modal-body">
+                <form action="{{ route('categories.update', $cat->id)}}" method="post">
+                @csrf
+                @METHOD('PUT')
+        <div class="form-group">
+            
+            <strong>Category Name </strong>
+                <input type="text" name="name" required value="{{ $cat->name }}" class="form-control" placeholder="Category Name">
+            
+            <strong>Description</strong>
+            <textarea id="editor1" name="description" required class="form-control" style="width: 100%;" style="border-radius:0px;">
+            {{ $cat->description }}
+                  </textarea>
+            
+            </div>
+            <div class="pull-left">
+            <p>&nbsp; </p>
+                <a class="btn btn-sm btn-danger" data-dismiss="modal">Close</a>
+            </div>
+            <div class="pull-right">
+            <p>&nbsp; </p>
+                <button type="submit" name="form2" class="btn btn-sm btn-primary">Save</button>
+            </div>
+        
+        </form>
+              </div>
+              <div class="modal-footer">
+                 
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+                <!--end modal-->
                 @endforeach
                 </tbody>
                 <tfoot>
@@ -86,10 +149,11 @@
         <div class="form-group">
             
             <strong>Category Name </strong>
-                <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Category Name">
+                <input type="text" name="name" required value="{{ old('name') }}" class="form-control" placeholder="Category Name">
             
             <strong>Description</strong>
-            <textarea id="editor1" name="description" class="form-control" style="width: 100%;" style="border-radius:0px;">
+            <textarea id="editor1" name="description" required class="form-control" style="width: 100%;" style="border-radius:0px;">
+            {{ old('description') }}
                   </textarea>
             
             </div>

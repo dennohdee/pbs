@@ -41,6 +41,13 @@ class AdminDepts extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            'roomNo' => 'required',
+            'deptName' => 'required'
+        ]);
+        Department::create($request->all());
+        return redirect()->back()
+            ->with('success','Department has been added succesfully.');
     }
 
     /**
@@ -75,6 +82,16 @@ class AdminDepts extends Controller
     public function update(Request $request, $id)
     {
         //
+        request()->validate([
+            'roomNo' => 'required',
+            'deptName' => 'required'
+        ]);
+        $dept = Department::find($id);
+        $dept->roomNo = $request->get('roomNo');
+        $dept->deptName = $request->get('deptName');
+        $dept->save();
+        return redirect()->back()
+            ->with('success','Department has been updated succesfully.');
     }
 
     /**
@@ -86,5 +103,10 @@ class AdminDepts extends Controller
     public function destroy($id)
     {
         //
+    
+        $dept = Department::find($id);
+        $dept->delete();
+            return redirect()->back()
+        ->with("success","Department deleted Successfully!");
     }
 }

@@ -35,22 +35,22 @@
                 <tr>
                  <th>S/No.</th>
                  <th>Staff No.</th>
-                 <th>Sur Name</th>
-                 <th>Other Name</th>
-                 <th>Department</th>
-                 <th>Notification.</th>
+                 <th>Name</th>
+                 <th>Message</th>
+                 <th>Posted By</th>
+                 <th>Time</th>
                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                
+                @foreach($notifications as $notification)
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                 <td>{{ ++$i }}</td>
+                 <td>{{ $notification->user->staffNo }}</td>
+                 <td>{{ $notification->user->name }}</td>
+                 <td>{{ $notification->message }}</td>
+                 <td>{{ $notification->admin->name }}</td>
+                 <td>{{ $notification->created_at }}</td>
                  <td>
                  <form action="" method="post">
                     <a class="btn btn-sm btn-success" href="">View</a>
@@ -61,6 +61,7 @@
                     </form>
                  </td>
                 </tr>
+                @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
@@ -95,10 +96,10 @@
         <div class="col-md-6 form-group">
             <strong>Staff</strong>
             <select name="department" class="form-control select2" style="width: 100%;" style="border-radius:0px;">
-                  <option selected="selected" value="">-Select Staff-</option> 
-                 
-                           <option value=""> </option>    
-                             
+                  <option selected="selected" value="">-Select Staff[No. - Name]-</option> 
+                 @foreach($staffs as $staff)
+                           <option value="{{ $staff->id }}">{{ $staff->staffNo }} - {{ $staff->name }} {{ $staff->otherNames }} </option>    
+                  @endforeach  
              </select>
             </div>
             <div class="col-md-6">

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notification;
+use Auth;
+use App\User;
 
 class AdminNotificationController extends Controller
 {
@@ -18,7 +21,9 @@ class AdminNotificationController extends Controller
     public function index()
     {
         //
-        return view('admin.notification.index');
+        $staffs = User::all();
+        $notifications = Notification::all()->sortByDesc('id');
+        return view('admin.notification.index', compact('notifications','staffs'))->with('i');
     }
 
     /**

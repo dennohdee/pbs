@@ -43,24 +43,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                
+                @foreach($performances as $performance)
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                 <td>{{ ++$i }}</td>
+                 <td>{{ $performance->user->staffNo }}</td>
+                 <td>{{ $performance->user->name }}</td>
+                 <td>{{ $performance->user->otherNames }}</td>
+                 <td>{{ $performance->user->department->deptName }}</td>
+                 <td>{{ $performance->points }}</td>
                  <td>
-                 <form action="" method="post">
+                 
                     <a class="btn btn-sm btn-success" href="">View</a>
-                    <a class="btn btn-sm btn-warning" href="">Edit</a>
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete staff?')" type="submit">Delete</button>
-                    </form>
+                    
                  </td>
                 </tr>
+                @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
@@ -80,63 +77,7 @@
       </div>
  
   
-      <div class="modal fade" id="modal-defaultf1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add Performance</h4>
-              </div>
-              <div class="modal-body">
-                <form action="{{ route('performance.create')}}" method="post">
-                @csrf
-        <div class="row">
-        <div class="col-md-6 form-group">
-            <strong>Staff</strong>
-            <select name="department" class="form-control select2" style="width: 100%;" style="border-radius:0px;">
-                  <option selected="selected" value="">-Select Staff-</option> 
-                 
-                           <option value=""> </option>    
-                             
-             </select>
-            </div>
-            <div class="col-md-6">
-            <strong>Points</strong>
-                <input type="number" name="points" value="{{ old('points') }}" class="form-control" placeholder="Points.(+/-)">
-            </div>
-            </div>
-            <div class="pad form-group">
-            <strong>Category </strong>
-            <select name="category_id" class="form-control select2" style="width: 100%;" style="border-radius:0px;">
-                  <option selected="selected" value="">-Select Category-</option> 
-                 
-                           <option value=""> </option>    
-                             
-             </select>					
-            </div>
-            
-            <div class="pull-left">
-            <p>&nbsp; </p>
-                <a class="btn btn-sm btn-danger" data-dismiss="modal">Close</a>
-            </div>
-            <div class="pull-right">
-            <p>&nbsp; </p>
-                <button type="submit" name="form2" class="btn btn-sm btn-primary">Save</button>
-            </div>
-        
-        </form>
-              </div>
-              <div class="modal-footer">
-                 
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
+     
     </section>
 
 @endsection

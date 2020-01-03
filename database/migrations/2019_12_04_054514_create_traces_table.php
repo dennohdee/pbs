@@ -15,7 +15,8 @@ class CreateTracesTable extends Migration
     {
         Schema::create('traces', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('points');
+            $table->string('points');
+            $table->string('description',255)->nullable();
             $table->integer('category_id')->references('id')->on('categories')->onUpdate('CASCADE')->onDelete('RESTRICT');
             $table->integer('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('RESTRICT');
             $table->integer('admin_id')->references('id')->on('admins')->onUpdate('CASCADE')->onDelete('RESTRICT');

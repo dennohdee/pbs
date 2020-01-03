@@ -36,4 +36,12 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function admin()
+    {
+        return $this->hasMany(Trace::class);
+    }
+    public function admins()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

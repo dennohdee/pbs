@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+use App\Department;
 use App\Performance;
+use App\Trace;
 use Auth;
+use App\Category;
 class PerformanceController extends Controller
 {
     public function __construct()   
@@ -18,8 +23,9 @@ class PerformanceController extends Controller
      */
     public function index()
     {
-        $perfomance = Performance::all()->where('staff_id', Auth::user()->id);
-        return view('performances.index', compact('performance'));
+        $traces = Trace::where('user_id',Auth::user()->id)->get();
+        $performances = Performance::where('staff_id',Auth::user()->id)->get()->sortByDesc('points');
+        return view('performances.index', compact('performances','traces'))->with('i');
     }
 
     /**

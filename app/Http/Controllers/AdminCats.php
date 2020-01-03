@@ -41,6 +41,13 @@ class AdminCats extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+        Category::create($request->all());
+        return redirect()->back()
+            ->with('success','Category has been added succesfully.');
     }
 
     /**
@@ -75,6 +82,16 @@ class AdminCats extends Controller
     public function update(Request $request, $id)
     {
         //
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+        $cat = Category::find($id);
+        $cat->name = $request->get('name');
+        $cat->description = $request->get('description');
+        $cat->save();
+        return redirect()->back()
+            ->with('success','Category has been updated succesfully.');
     }
 
     /**
@@ -86,5 +103,9 @@ class AdminCats extends Controller
     public function destroy($id)
     {
         //
+        $cat = Category::find($id);
+        $cat->delete();
+        return redirect()->back()
+            ->with('success','Category has been deleted succesfully.');
     }
 }

@@ -18,7 +18,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::all()->where('staff_id', Auth::user()->id);
+        $notifications = Notification::all()->where('staff_id', Auth::user()->id)->sortByDesc('points');
         return view('notifications.index', compact('notifications'));
     }
 

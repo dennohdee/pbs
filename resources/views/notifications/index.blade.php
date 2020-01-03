@@ -32,37 +32,28 @@
                 <thead>
                 <tr>
                  <th>S/No.</th>
-                 <th>Staff No.</th>
-                 <th>Sur Name</th>
-                 <th>Other Name</th>
-                 <th>Department</th>
-                 <th>Notification.</th>
-                 <th>Actions</th>
+                 <th>Notification</th>
+                 <th>Posted By.</th>
+                 <th>Time Posted</th>
                 </tr>
                 </thead>
                 <tbody>
-                
+                @foreach($notifications as $notification)
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td>
-                    <a class="btn btn-sm btn-success" href="{{ route('notifications.index')}}">View</a>
-                 </td>
+                 <td>{{ ++$i }}</td>
+                 <td>{{ $notification->message }}</td>
+                 <td>{{ $notification->admin->name }}</td>
+                 <td>{{ $notification->created_at }}</td>
+                
                 </tr>
+                @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
                  <th>S/No.</th>
-                 <th>Staff No.</th>
-                 <th>Sur Name</th>
-                 <th>Other Name</th>
-                 <th>Department</th>
-                 <th>Notification.</th>
-                 <th>Actions</th>
+                 <th>Notification</th>
+                 <th>Posted By.</th>
+                 <th>Time Posted</th>
                 </tr>
                 </tfoot>
                 </table>

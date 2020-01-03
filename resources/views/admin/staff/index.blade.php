@@ -27,7 +27,24 @@
           </div>
         </div>
         <div class="box-body">
-        
+        @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <p>{{$message}}</p>
+                </div>
+              @endif
+        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                           <strong>Error! </strong>There were some errors with inputs. 
+                         <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul> 
+                    </div>
+                    
+                @endif
          <!--tbl -->
       
          <table id="example1" class="table table-bordered table-striped">
@@ -37,40 +54,45 @@
                  <th>Staff No.</th>
                  <th>Sur Name</th>
                  <th>Other Name</th>
-                 <th>ID No.</th>
+                 <th>Email</th>
+                 <th>Position</th>
                  <th>Phone No.</th>
                  <th>Department</th>
                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                
+                @foreach($staffs as $staff)
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                 <td> {{ ++$i }}</td>
+                 <td>{{ $staff->staffNo }}</td>
+                 <td>{{ $staff->name }}</td>
+                 <td>{{ $staff->otherNames }}</td>
+                 <td>{{ $staff->email }}</td>
+                 <td>{{ $staff->position }}</td>
+                 <td>{{ $staff->phone }}</td>
+                 <td>{{ $staff->department->deptName }}</td>
                  <td>
-                 <form action="" method="post">
-                    <a class="btn btn-sm btn-success" href="">View</a>
-                    <a class="btn btn-sm btn-warning" href="">Edit</a>
+                 <form action="{{ route('staff.destroy', $staff->id)}}" method="post">
+              
+                  <a href="{{ route('staff.show', $staff->id)}}" class="btn btn-sm btn-success">View</a>
+                    <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-default-{{ $staff->id }}"><i class="fa fa-edit">Edit</i></a>
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete staff?')" type="submit">Delete</button>
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete Staff?')" type="submit"><i class="fa fa-trash">Delete</i></button>
                     </form>
                  </td>
                 </tr>
+                @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
-                 <th>S/No.</th>
+                <th>S/No.</th>
                  <th>Staff No.</th>
                  <th>Sur Name</th>
                  <th>Other Name</th>
-                 <th>ID No.</th>
+                 <th>Email</th>
+                 <th>Position</th>
                  <th>Phone No.</th>
                  <th>Department</th>
                  <th>Actions</th>
@@ -92,36 +114,40 @@
                 <h4 class="modal-title">Add Staff</h4>
               </div>
               <div class="modal-body">
-                <form action="{{ route('staff.create')}}" method="post">
+                <form action="{{ route('staff.store')}}" name="form1" method="post">
                 @csrf
         <div class="row">
             <div class="col-md-6">
             <strong>Sur Name </strong>
-                <input type="text" name="surName1" value="{{ old('surName1') }}" class="form-control" placeholder="Sur Name">
+                <input type="text" name="name" required value="{{ old('name') }}" class="form-control" placeholder="Sur Name">
             </div>
             <div class="col-md-6">
-            <strong>ID No. </strong>
-                <input type="number" name="idNo1" value="{{ old('idNo1') }}" class="form-control" placeholder="ID No.">
+            <strong>Position. </strong>
+                <input type="text" name="position" value="{{ old('position') }}" class="form-control" placeholder="Position">
             </div>
             <div class="col-md-6">
-            <strong>Other Name </strong>
-                <input type="text" name="otherName1" value="{{ old('otherName1') }}" class="form-control" placeholder="Other Name">
+            <strong>Other Name(s) </strong>
+                <input type="text" name="otherNames" required value="{{ old('otherNames') }}" class="form-control" placeholder="Other Name(s)">
             </div>
             <div class="col-md-6">
             <strong>Phone No. </strong>
-                <input type="text" name="phoneNo1" value="{{ old('phoneNo1') }}" class="form-control" placeholder="Phone No.">
+                <input type="text" name="phone" required value="{{ old('phoneNo') }}" class="form-control" placeholder="Phone No.">
             </div>
             <div class="col-md-6">
             <strong>Email </strong>
-                <input type="email" name="email1" value="{{ old('email1') }}" class="form-control" placeholder="Email">
+                <input type="email" name="email" required value="{{ old('email') }}" class="form-control" placeholder="Email">
             </div>
             <div class="col-md-6 form-group">
+            <strong>Staff No. </strong>
+                <input type="text" name="staffNo" required value="{{ old('text') }}" class="form-control" placeholder="Staff No.">
+            </div>
+            <div class="col-md-12">
             <strong>Department</strong>
-            <select name="department" class="form-control select2" style="width: 100%;" style="border-radius:0px;">
+            <select name="deptId" class="form-control select2" style="width: 100%;" style="border-radius:0px;" required>
                   <option selected="selected" value="">-Select Department-</option> 
-                 
-                           <option value=""> </option>    
-                             
+                        @foreach($depts as $dept)
+                           <option value="{{ $dept->id}}">{{ $dept->deptName}} </option>    
+                          @endforeach 
              </select>
             </div>
             
@@ -132,7 +158,7 @@
             </div>
             <div class="pull-right">
             <p>&nbsp; </p>
-                <button type="submit" name="form2" class="btn btn-sm btn-primary">Save</button>
+                <button type="submit" name="form1" class="btn btn-sm btn-primary">Save</button>
             </div>
         
         </form>
